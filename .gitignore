@@ -1,0 +1,5 @@
+/account-datalayer/target/
+/target/
+/account-logic/target/
+/account-rest/target/
+/account-xfinal-test/target/

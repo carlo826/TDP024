@@ -21,7 +21,7 @@
           <groupId>tdp024</groupId>
           <artifactId>datalayer</artifactId>
           <version>${project.version}</version>
-    </dependency>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
