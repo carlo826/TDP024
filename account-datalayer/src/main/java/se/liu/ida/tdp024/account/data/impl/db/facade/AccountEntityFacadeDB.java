@@ -19,9 +19,10 @@ public class AccountEntityFacadeDB implements AccountEntityFacade {
          * Creates and return a new account.
          */
         EntityManager em = EMF.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
+        EntityTransaction tx = null;
         try {
+            tx = em.getTransaction();
+            tx.begin();
             Account account = new AccountDB();
             account.setAccountType(accountType);
             account.setPersonKey(personKey);
@@ -29,9 +30,14 @@ public class AccountEntityFacadeDB implements AccountEntityFacade {
             em.persist(account);
             tx.commit();
             return account;
+        } catch (RuntimeException e) {
+            if (tx != null && tx.isActive())
+                tx.rollback();
+            System.out.println(e.getMessage());
         } finally {
             em.close();
         }
+        return null;
     }
 
     @Override
@@ -42,12 +48,11 @@ public class AccountEntityFacadeDB implements AccountEntityFacade {
         EntityManager em = EMF.getEntityManager();
         try {
             return em.createQuery(
-                    "SELECT a FROM AccountDB a WHERE a.personKey LIKE :personKey ", Account.class)
+                    "SELECT a FROM AccountDB a WHERE a.personKey = :personKey ", Account.class)
                     .setParameter("personKey", personKey)
                     .getResultList();
         } finally {
             em.close();
         }
     }
-    
 }

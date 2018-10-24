@@ -9,6 +9,17 @@ import se.liu.ida.tdp024.account.data.api.entity.Account;
 @Entity
 public class AccountDB implements Account {
 
+    public AccountDB(long id, Type accountType, String personKey, String bankKey) {
+        this.id = id;
+        this.accountType = accountType;
+        this.personKey = personKey;
+        this.bankKey = bankKey;
+    }
+
+    public AccountDB() {
+    }
+
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
