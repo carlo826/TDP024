@@ -19,7 +19,6 @@ var appRouter = function(app){
     app.get("/find.name", function(req, res){
         var found = false;
         var bankName = req.param("name");
-        res.status(200).send(bankName);
         for (var key in bankDict){
             if (bankDict[key] == bankName){
                 found = true;
@@ -27,20 +26,21 @@ var appRouter = function(app){
             }
         }
         if(!found)
-            res.status(200).send('null');
+            res.status(204).send('null');
     });
 
     app.get("/find.key", function(req, res){
+        var found = false;
         var bankKey = req.param("key");
         for (var key in bankDict){
             if(key == bankKey){
+                found = true;
                 res.status(200).send(bankDict[key]);
             }
         }
-        res.status(200).send('null');
+        if(!found)
+            res.status(204).send('null');
     });
 }
-
-
 
 module.exports = appRouter;

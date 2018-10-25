@@ -15,12 +15,17 @@ var appRouter = function(app){
     app.get("/find.name", function(req, res){
         var personName = req.param("name");
         var resultDict = {};
+        var found = false;
         for (var key in personDict){
             if (personDict[key] == personName){
+                found = true;
                 resultDict[key] = personName;
             }
         }
-        res.status(200).send(resultDict);
+        if(found)
+            res.status(200).send(resultDict);
+        else
+            res.status(204).send(resultDict);
     });
 
     app.get("/find.key", function(req, res){
@@ -30,7 +35,7 @@ var appRouter = function(app){
                 res.status(200).send(personDict[key]);
             }
         }
-        res.status(200).send('null');
+        res.status(204).send('null');
     });
 }
 
