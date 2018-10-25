@@ -18,7 +18,7 @@ var appRouter = function(app){
 
     app.get("/bank/find.name", function(req, res){
         var found = false;
-        var bankName = req.params.name;
+        var bankName = req.query["name"];
         for (var key in bankDict){
             if (bankDict[key] == bankName){
                 found = true;
@@ -26,12 +26,12 @@ var appRouter = function(app){
             }
         }
         if(!found)
-            res.status(204).send('null');
+            res.status(200).send('null');
     });
 
     app.get("/bank/find.key", function(req, res){
         var found = false;
-        var bankKey = req.params.key;
+        var bankKey = req.query["key"];
         for (var key in bankDict){
             if(key == bankKey){
                 found = true;
@@ -39,7 +39,7 @@ var appRouter = function(app){
             }
         }
         if(!found)
-            res.status(204).send('null');
+            res.status(200).send('null');
     });
 }
 

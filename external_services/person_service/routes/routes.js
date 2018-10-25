@@ -1,5 +1,5 @@
 var personDict = {
-    1: "Jakob Pogulis",
+    "1": "Jakob Pogulis",
     2: "Xena",
     3: "Marcus Bendtsen",
     4: "Zorro",
@@ -8,12 +8,12 @@ var personDict = {
 
 var appRouter = function(app){
 
-    app.get("/perosn/list", function(req, res){
+    app.get("/person/list", function(req, res){
         res.status(200).json(personDict);
     });
 
     app.get("/person/find.name", function(req, res){
-        var personName = req.params.name;
+        var personName = req.query["name"];
         var resultDict = {};
         var found = false;
         for (var key in personDict){
@@ -25,17 +25,18 @@ var appRouter = function(app){
         if(found)
             res.status(200).send(resultDict);
         else
-            res.status(204).send(resultDict);
+            res.status(200).send(resultDict);
     });
 
     app.get("/person/find.key", function(req, res){
-        var personKey = req.params.key;
+        var personKey = req.query["key"];
         for (var key in personDict){
             if(key == personKey){
-                res.status(200).send(personDict[key]);
+                res.status(200).send(personDict[key]);     
+                return;
             }
         }
-        res.status(204).send('null');
+        res.status(200).send('null');
     });
 }
 

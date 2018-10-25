@@ -8,5 +8,5 @@ app.use(parser.json());
 routes(app);
 
 var server = app.listen(8060, function(){
-    console.log("App running on port.", server.address().port);
+    console.log("Person service running on port: ", server.address().port);
 });
