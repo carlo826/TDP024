@@ -12,11 +12,11 @@ var bankDict = {
 
 var appRouter = function(app){
 
-    app.get("/list", function(req, res){
+    app.get("/bank/list", function(req, res){
         res.status(200).json(bankDict);
     });
 
-    app.get("/find.name", function(req, res){
+    app.get("/bank/find.name", function(req, res){
         var found = false;
         var bankName = req.param("name");
         for (var key in bankDict){
@@ -29,7 +29,7 @@ var appRouter = function(app){
             res.status(204).send('null');
     });
 
-    app.get("/find.key", function(req, res){
+    app.get("/bank/find.key", function(req, res){
         var found = false;
         var bankKey = req.param("key");
         for (var key in bankDict){

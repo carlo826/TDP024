@@ -8,11 +8,11 @@ var personDict = {
 
 var appRouter = function(app){
 
-    app.get("/list", function(req, res){
+    app.get("/perosn/list", function(req, res){
         res.status(200).json(personDict);
     });
 
-    app.get("/find.name", function(req, res){
+    app.get("/person/find.name", function(req, res){
         var personName = req.param("name");
         var resultDict = {};
         var found = false;
@@ -28,7 +28,7 @@ var appRouter = function(app){
             res.status(204).send(resultDict);
     });
 
-    app.get("/find.key", function(req, res){
+    app.get("/person/find.key", function(req, res){
         var personKey = req.param("key");
         for (var key in personDict){
             if(key == personKey){
