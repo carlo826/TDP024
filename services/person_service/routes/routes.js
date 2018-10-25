@@ -1,9 +1,9 @@
 var personDict = {
-    "ahRzfmVudGVycHJpc2Utc3lzdGVtc3INCxIGUGVyc29uGLNtDA1": "Jakob Pogulis",
-    "ahRzfmVudGVycHJpc2Utc3lzdGVtc3INCxIGUGVyc29uGLNtDA2": "Xena",
-    "ahRzfmVudGVycHJpc2Utc3lzdGVtc3INCxIGUGVyc29uGLNtDA3": "Marcus Bendtsen",
-    "ahRzfmVudGVycHJpc2Utc3lzdGVtc3INCxIGUGVyc29uGLNtDA4": "Zorro",
-    "ahRzfmVudGVycHJpc2Utc3lzdGVtc3INCxIGUGVyc29uGLNtDA5": "Q"
+    1: "Jakob Pogulis",
+    2: "Xena",
+    3: "Marcus Bendtsen",
+    4: "Zorro",
+    5: "Q"
 }
 
 var appRouter = function(app){

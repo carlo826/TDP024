@@ -1,13 +1,13 @@
 var bankDict = {
-    "ahRzfmVudGVycHJpc2Utc3lzdGVtc3ILCxIEQmFuaxiJJww1": "SWEDBANK",
-    "ahRzfmVudGVycHJpc2Utc3lzdGVtc3ILCxIEQmFuaxiJJww2": "IKANOBANKEN",
-    "ahRzfmVudGVycHJpc2Utc3lzdGVtc3ILCxIEQmFuaxiJJww3": "JPMORGAN",
-    "ahRzfmVudGVycHJpc2Utc3lzdGVtc3ILCxIEQmFuaxiJJww4": "NORDEA",
-    "ahRzfmVudGVycHJpc2Utc3lzdGVtc3ILCxIEQmFuaxiJJww5": "CITIBANK",
-    "ahRzfmVudGVycHJpc2Utc3lzdGVtc3ILCxIEQmFuaxiJJww6": "HANDELSBANKEN",
-    "ahRzfmVudGVycHJpc2Utc3lzdGVtc3ILCxIEQmFuaxiJJww7": "SBAB",
-    "ahRzfmVudGVycHJpc2Utc3lzdGVtc3ILCxIEQmFuaxiJJww8": "HSBC",
-    "ahRzfmVudGVycHJpc2Utc3lzdGVtc3ILCxIEQmFuaxiJJww9": "NORDNET",
+    1: "SWEDBANK",
+    2: "IKANOBANKEN",
+    3: "JPMORGAN",
+    4: "NORDEA",
+    5: "CITIBANK",
+    6: "HANDELSBANKEN",
+    7: "SBAB",
+    8: "HSBC",
+    9: "NORDNET",
 }
 
 var appRouter = function(app){
