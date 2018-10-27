@@ -3,3 +3,10 @@
 /account-logic/target/
 /account-rest/target/
 /account-xfinal-test/target/
+
+**/nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
