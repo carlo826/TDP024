@@ -182,8 +182,6 @@ public class TransactionTest {
         String accountJson = httpHelper.get(FinalConstants.ENDPOINT + "account/find/person", "person", "4");
         AccountDTO[] accountDTos = jsonSerializer.fromJson(accountJson, AccountDTO[].class);
         final AccountDTO accountDTO = accountDTos[0];
-
-
         
         //Create lots of small credits
         final int size = 1000;

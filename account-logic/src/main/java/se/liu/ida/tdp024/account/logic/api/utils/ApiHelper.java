@@ -9,6 +9,7 @@ package se.liu.ida.tdp024.account.logic.api.utils;
  *
  * @author frazz
  */
-public interface HTTPGet {
-    String get(String urlStr) throws Exception;
+public interface ApiHelper {
+    String getPerson(String key) throws Exception;
+    String getBank(String key) throws Exception;
 }

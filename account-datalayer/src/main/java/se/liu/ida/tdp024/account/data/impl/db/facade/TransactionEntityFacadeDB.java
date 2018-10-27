@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.LockModeType;
 import se.liu.ida.tdp024.account.data.api.entity.Account;
 import se.liu.ida.tdp024.account.data.api.entity.Transaction;
 import se.liu.ida.tdp024.account.data.api.facade.TransactionEntityFacade;
@@ -50,12 +51,13 @@ public class TransactionEntityFacadeDB implements TransactionEntityFacade {
         Account account = em.find(AccountDB.class, id);
         Transaction.Status status = Transaction.Status.FAILED;
         try {
-            if (account == null)
-                throw new IllegalArgumentException("Account does not exist with ID: "+ id);
-            if (amount < 0)
-                throw new IllegalArgumentException("Amount must be positive"); 
             tx = em.getTransaction();
             tx.begin();
+            em.lock(account, LockModeType.PESSIMISTIC_WRITE);
+            if (account == null)
+                throw new IllegalArgumentException("Account does not exist with ID: "+ id);
+            if (amount <= 0)
+                throw new IllegalArgumentException("Amount must be positive");
             account.setHoldings(account.getHoldings()+amount);
             tx.commit();
             status = Transaction.Status.OK;
@@ -86,14 +88,15 @@ public class TransactionEntityFacadeDB implements TransactionEntityFacade {
         Account account = em.find(AccountDB.class, id);
         Transaction.Status status = Transaction.Status.FAILED;
         try {
+            tx = em.getTransaction();
+            tx.begin();
+            em.lock(account, LockModeType.PESSIMISTIC_WRITE);
             if (account == null)
                 throw new IllegalArgumentException("Account does not exist with ID: "+ id);
             if (amount > account.getHoldings())
                 throw new IllegalArgumentException("Account does not have enough holdings to debit "+amount+" monies"); 
-            if (amount < 0)
+            if (amount <= 0)
                 throw new IllegalArgumentException("Amount must be positive"); 
-            tx = em.getTransaction();
-            tx.begin();
             account.setHoldings(account.getHoldings()-amount);
             tx.commit();
             status = Transaction.Status.OK;

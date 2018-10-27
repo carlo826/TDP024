@@ -9,16 +9,28 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import se.liu.ida.tdp024.account.logic.api.utils.HTTPGet;
+import se.liu.ida.tdp024.account.logic.api.utils.ApiHelper;
 
 /**
  *
  * @author frazz
  */
-public class HTTPGetImpl implements HTTPGet {
+public class ApiHelperImpl implements ApiHelper {
+    
+    private final String PERSON_ENDPOINT = "http://localhost:8060/person/";
+    private final String BANK_ENDPOINT = "http://localhost:8070/bank/";
 
     @Override
-    public String get(String urlStr) throws Exception {
+    public String getPerson(String key) throws Exception {
+        return get(PERSON_ENDPOINT + "find.key?key=" + key);
+    }
+
+    @Override
+    public String getBank(String key) throws Exception {
+        return get(BANK_ENDPOINT + "find.name?name=" + key);
+    }
+    
+    private String get(String urlStr) throws Exception {
         StringBuilder res = new StringBuilder();
         URL url = new URL(urlStr);
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();

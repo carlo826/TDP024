@@ -4,19 +4,16 @@ import java.util.ArrayList;
 import se.liu.ida.tdp024.account.data.api.entity.Account;
 import se.liu.ida.tdp024.account.data.api.facade.AccountEntityFacade;
 import se.liu.ida.tdp024.account.logic.api.facade.AccountLogicFacade;
-import se.liu.ida.tdp024.account.logic.api.utils.HTTPGet;
+import se.liu.ida.tdp024.account.logic.api.utils.ApiHelper;
 
 public class AccountLogicFacadeImpl implements AccountLogicFacade {
-    
-    private final String PERSON_ENDPOINT = "http://localhost:8060/person/";
-    private final String BANK_ENDPOINT = "http://localhost:8070/bank/";
 
     private final AccountEntityFacade accountEntityFacade;
-    private final HTTPGet httpGet;
+    private final ApiHelper apiHelper;
     
-    public AccountLogicFacadeImpl(AccountEntityFacade accountEntityFacade, HTTPGet httpGet) {
+    public AccountLogicFacadeImpl(AccountEntityFacade accountEntityFacade, ApiHelper apiHelper) {
         this.accountEntityFacade = accountEntityFacade;
-        this.httpGet = httpGet;
+        this.apiHelper = apiHelper;
     }
 
     @Override
@@ -31,12 +28,12 @@ public class AccountLogicFacadeImpl implements AccountLogicFacade {
         String bank;
         
         try {
-            person = httpGet.get(PERSON_ENDPOINT + "/find.key?key=" + personKey);
+            person = apiHelper.getPerson(personKey);
             if ("null".equals(person))
-                throw new IllegalArgumentException("PersonKey does not exist");
-            bank = httpGet.get(BANK_ENDPOINT + "/find.name?name=" + bankKey);
+                throw new IllegalArgumentException("PersonKey: "+ personKey +", does not exist");
+            bank = apiHelper.getBank(bankKey);
             if ("null".equals(bank))
-                throw new IllegalArgumentException("BankKey does not exist");
+                throw new IllegalArgumentException("BankKey: "+ bankKey +", does not exist");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
@@ -55,12 +52,7 @@ public class AccountLogicFacadeImpl implements AccountLogicFacade {
 
     @Override
     public ArrayList<Account> find(String personKey) {
-        try {
-            return new ArrayList(accountEntityFacade.find(personKey));
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return new ArrayList<>();
-        }
+        return new ArrayList(accountEntityFacade.find(personKey));
     }
     
 }
