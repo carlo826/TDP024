@@ -51,11 +51,11 @@ public class TransactionEntityFacadeDB implements TransactionEntityFacade {
         Account account = em.find(AccountDB.class, id);
         Transaction.Status status = Transaction.Status.FAILED;
         try {
+            if (account == null)
+                throw new IllegalArgumentException("Account does not exist with ID: "+ id);
             tx = em.getTransaction();
             tx.begin();
             em.lock(account, LockModeType.PESSIMISTIC_WRITE);
-            if (account == null)
-                throw new IllegalArgumentException("Account does not exist with ID: "+ id);
             if (amount <= 0)
                 throw new IllegalArgumentException("Amount must be positive");
             account.setHoldings(account.getHoldings()+amount);
@@ -69,15 +69,12 @@ public class TransactionEntityFacadeDB implements TransactionEntityFacade {
             em.close();
         }
         
-        Transaction transaction = new TransactionDB(
-                id, 
+        insertIntoDatabase(
                 Transaction.Type.CREDIT, 
                 amount, 
                 status, 
-                dateFormat.format(Calendar.getInstance().getTime()), 
                 account
-        );
-        insertIntoDatabase(transaction);
+        );        
         return status;
     }
 
@@ -88,11 +85,11 @@ public class TransactionEntityFacadeDB implements TransactionEntityFacade {
         Account account = em.find(AccountDB.class, id);
         Transaction.Status status = Transaction.Status.FAILED;
         try {
+            if (account == null)
+                throw new IllegalArgumentException("Account does not exist with ID: "+ id);
             tx = em.getTransaction();
             tx.begin();
             em.lock(account, LockModeType.PESSIMISTIC_WRITE);
-            if (account == null)
-                throw new IllegalArgumentException("Account does not exist with ID: "+ id);
             if (amount > account.getHoldings())
                 throw new IllegalArgumentException("Account does not have enough holdings to debit "+amount+" monies"); 
             if (amount <= 0)
@@ -108,30 +105,33 @@ public class TransactionEntityFacadeDB implements TransactionEntityFacade {
             em.close();
         }
         
-        Transaction transaction = new TransactionDB(
-                id, 
+        insertIntoDatabase(
                 Transaction.Type.DEBIT, 
                 amount, 
                 status, 
-                dateFormat.format(Calendar.getInstance().getTime()), 
                 account
         );
-        insertIntoDatabase(transaction);
         return status;
     }
     
-    private void insertIntoDatabase (Transaction transaction) {
+    private void insertIntoDatabase (Transaction.Type type, int amount, Transaction.Status status, Account account) {
         EntityManager em = EMF.getEntityManager();
         EntityTransaction tx = null;
         try {
             tx = em.getTransaction();
             tx.begin();
+            Transaction transaction = new TransactionDB();
+            transaction.setTransactionType(type);
+            transaction.setAmount(amount);
+            transaction.setStatus(status);
+            transaction.setCreated(dateFormat.format(Calendar.getInstance().getTime()));
+            transaction.setAccount(account);
             em.persist(transaction);
             tx.commit();
-        } catch (RuntimeException e) {
-            if (tx != null && tx.isActive())
-                tx.rollback();
-            System.out.println(e.getMessage());
+        //} catch (RuntimeException e) {
+        //    if (tx != null && tx.isActive())
+        //        tx.rollback();
+        //    System.out.println(e.getMessage());
         } finally {
             em.close();
         }

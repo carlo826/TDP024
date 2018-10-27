@@ -70,7 +70,7 @@ public class AccountLogicFacadeTest {
     public void testFind() {
         accountLogicFacade.create("CHECK", "2", "SWEDBANK");
         List<Account> accs = accountLogicFacade.find("2");
-        Assert.assertFalse(accs.isEmpty());
+        Assert.assertTrue(!accs.isEmpty() && accs.get(0).getAccountType() == Account.Type.CHECK);
     }
     
     @Test
