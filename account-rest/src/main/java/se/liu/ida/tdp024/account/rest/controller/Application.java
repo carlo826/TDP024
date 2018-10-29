@@ -1,4 +1,4 @@
-package endpoints;
+package se.liu.ida.tdp024.account.rest.controller;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

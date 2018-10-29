@@ -2,8 +2,7 @@ package se.liu.ida.tdp024.account.data.api.entity;
 
 import java.io.Serializable;
 
-public interface Account extends Serializable {
-    
+public interface Account extends Serializable {    
     void setID(long id); long getID();
     void setAccountType(Type accountType); Type getAccountType();
     void setPersonKey(String personKey); String getPersonKey();

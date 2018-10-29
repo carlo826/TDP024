@@ -1,5 +1,5 @@
 
-package endpoints;
+package se.liu.ida.tdp024.account.rest.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -38,19 +38,19 @@ public class AccountController {
     }
     
     @RequestMapping("account-rest/account/debit")
-    public String accountDebit(@RequestParam(value="id") int id,
+    public String accountDebit(@RequestParam(value="id") long id,
                                @RequestParam(value="amount") int amount) {
         return transactionLogicFacade.debit(id, amount) ? "OK" : "FAILED";
     }
     
     @RequestMapping("account-rest/account/credit")
-    public String accountCredit(@RequestParam(value="id") int id,
+    public String accountCredit(@RequestParam(value="id") long id,
                                 @RequestParam(value="amount") int amount) {
         return transactionLogicFacade.credit(id, amount) ? "OK" : "FAILED";
     }
     
     @RequestMapping("account-rest/account/transactions")
-    public String accountPersonFind(@RequestParam(value="id") int id) {
+    public String transactions(@RequestParam(value="id") long id) {
         Gson gsonBuilder = new GsonBuilder().create();
         return gsonBuilder.toJson(transactionLogicFacade.transactions(id));    
     }
