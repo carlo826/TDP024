@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Sat Oct 27 15:57:15 CEST 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0166-b5d0-8d99-0000006fa138 
-on database directory memory:D:\Projects\school\TDP024_SOA\account-rest\dataPU_embedded with class loader sun.misc.Launcher$AppClassLoader@b4aac2 
-Loaded from file:/C:/Users/frazz/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+Wed Oct 31 18:20:56 CET 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0166-cb24-7550-000032802388 
+on database directory memory:/home/carlo826/git/TDP024_SOA/account-rest/dataPU_embedded with class loader sun.misc.Launcher$AppClassLoader@14dad5dc 
+Loaded from file:/home/carlo826/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_112-b15
-user.dir=D:\Projects\school\TDP024_SOA\account-rest
-os.name=Windows 10
-os.arch=x86
-os.version=10.0
+java.runtime.version=1.8.0_45-b14
+user.dir=/home/carlo826/git/TDP024_SOA/account-rest
+os.name=Linux
+os.arch=amd64
+os.version=4.4.0-138-generic
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''

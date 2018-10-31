@@ -106,5 +106,51 @@ public class AccountControllerTest {
         String res = accountController.handleMissingParams(new MissingServletRequestParameterException("id", "Integer"));
         assertEquals("FAILED", res);
     }
-        
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testInvalidAccountType() {
+        accountController.accountCreate("ASD", "2", "SWEDBANK");
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateInvalidPersonKey() {
+        accountController.accountCreate("CHECK", "", "SWEDBANK");
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateInvalidBankKey() {
+        accountController.accountCreate("CHECK", "2", "");
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testFindInvalidPersonKey() {
+        accountController.accountPersonFind("");
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testDebitInvalidID() {
+        accountController.accountDebit(-1, 200);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testDebitInvalidAmount() {
+        accountController.accountDebit(id, -200);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreditInvalidID() {
+        accountController.accountCredit(-1, 200);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreditInvalidAmount() {
+        accountController.accountCredit(id, -200);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testTransactionsInvalidID() {
+        accountController.transactions(-1);
+    }
+    
+    
 }

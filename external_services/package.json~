@@ -1,0 +1,20 @@
+{
+  "name": "tdp024_services",
+  "version": "1.0.0",
+  "description": "TDP024 services",
+  "author": "Frans Bergstrom & Carl Lorentson",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "npm-run-all": "latest"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start:legacy": "npm-run-all --parallel start:person-legacy start:bank-legacy",
+    "start:bank-legacy": "nodejs bank_service/index.js",
+    "start:person-legacy": "nodejs person_service/index.js",
+    "start": "npm-run-all --parallel start:person start:bank",
+    "start:bank": "node bank_service/index.js",
+    "start:person": "node person_service/index.js"
+  }
+}
